@@ -58,6 +58,16 @@ def within_spread(row):
 df['within_spread'] = df.apply(within_spread, axis=1)
 
 
+def isHugeFavorite(row):
+    
+    if abs(row['spread_favorite']) >= 14.5:
+        return True
+    else:
+        return False
+    
+df['is_huge_favorite'] = df.apply(isHugeFavorite, axis=1)
+
+
 # Assuming your DataFrame is named 'df'
 grouped_season = df.groupby('schedule_season')
 
