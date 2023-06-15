@@ -93,3 +93,8 @@ favorites_per_team = df.groupby(['favorite', 'is_huge_favorite'])['is_huge_favor
 favorites_per_team = favorites_per_team[favorites_per_team['is_huge_favorite'] == True]
 fig = px.bar(favorites_per_team, x = 'favorite', y = 'counts', title = 'Number of times each team has been favored by at least two touchdowns, 1979 - present.')
 fig.show()
+
+
+favorites_per_team = df.groupby(['favorite', 'is_huge_favorite'])['favorite'].size().reset_index(name='counts')
+fig = px.bar(favorites_per_team, x = 'favorite', y = 'counts', title = 'Number of times each team has been the pre-match favorite, 1979 - present.', color = 'is_huge_favorite')
+fig.show()
