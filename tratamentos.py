@@ -88,3 +88,8 @@ test = df.groupby(['weather_wind_mph'])['total'].mean().reset_index()
 fig = px.scatter(test, x = 'weather_wind_mph', y = 'total', title = 'Average Total Score by Wind Velocity, Miles per Hour')
 fig.update_layout(yaxis_range=[22, 50])
 fig.show()
+
+favorites_per_team = df.groupby(['favorite', 'is_huge_favorite'])['is_huge_favorite'].size().reset_index(name='counts')
+favorites_per_team = favorites_per_team[favorites_per_team['is_huge_favorite'] == True]
+fig = px.bar(favorites_per_team, x = 'favorite', y = 'counts', title = 'Number of times each team has been favored by at least two touchdowns, 1979 - present.')
+fig.show()
