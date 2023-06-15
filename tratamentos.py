@@ -72,3 +72,14 @@ count_within_spread = count_within_spread[count_within_spread['schedule_season']
 fig = px.bar(count_within_7_points, x = 'schedule_season', y = 'ratio')
 fig.update_layout(title = 'Percentage of games in season where the total falls within 3 points of the projected total')
 fig.show()
+
+
+grouped_season_outcome = df.groupby(['schedule_season', 'outcome']).size().reset_index(name='count')
+grouped_season_outcome = grouped_season_outcome[grouped_season_outcome['schedule_season'] >= 1979]
+grouped_season_outcome['percentage'] = grouped_season_outcome.groupby('schedule_season')['count'].apply(lambda x: 100 * x / x.sum())
+
+fig = px.area(grouped_season_outcome, x='schedule_season', y='percentage', color='outcome', title='Percentage of Outcome by Season')
+fig.show()
+
+fig = px.histogram(df, x = 'spread_favorite', nbins=100, title='Most common spreads in the NFL, 1979 - present')
+fig.show()
