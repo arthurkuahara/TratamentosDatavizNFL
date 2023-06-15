@@ -77,10 +77,10 @@ fig.show()
 
 grouped_season_outcome = df.groupby(['schedule_season', 'outcome']).size().reset_index(name='count')
 grouped_season_outcome = grouped_season_outcome[grouped_season_outcome['schedule_season'] >= 1979]
-grouped_season_outcome['percentage'] = grouped_season_outcome.groupby('schedule_season')['count'].apply(lambda x: 100 * x / x.sum())
+grouped_season_outcome['percentage'] = grouped_season_outcome.groupby('schedule_season')['count'].apply(lambda x: x / x.sum())
 
 fig = px.area(grouped_season_outcome, x='schedule_season', y='percentage', color='outcome', title='Percentage of Outcome by Season')
-fig.layout.yaxis.tickformat = ',.0%'
+fig.layout.yaxis.tickformat = '.0%'
 fig.show()
 
 fig = px.histogram(df, x = 'spread_favorite', nbins=100, title='Most common spreads in the NFL, 1979 - present')
