@@ -83,3 +83,8 @@ fig.show()
 
 fig = px.histogram(df, x = 'spread_favorite', nbins=100, title='Most common spreads in the NFL, 1979 - present')
 fig.show()
+
+test = df.groupby(['weather_wind_mph'])['total'].mean().reset_index()
+fig = px.scatter(test, x = 'weather_wind_mph', y = 'total', title = 'Average Total Score by Wind Velocity, Miles per Hour')
+fig.update_layout(yaxis_range=[22, 50])
+fig.show()
